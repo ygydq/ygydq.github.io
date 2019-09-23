@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="第二次," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="3. 在C51中为何要尽量采用无符号的字节变量或位变量？答：C51的基本数据类型主要有字符型char、整型int和长整型long，又可分别分为有符号signed和无符号unsigned。MCS-51单片机是8位机，本身不支持有符号运算。">
+<meta name="keywords" content="第二次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二次作业解答">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/02zuoye/index.html">
+<meta property="og:site_name" content="豫工院单片机">
+<meta property="og:description" content="3. 在C51中为何要尽量采用无符号的字节变量或位变量？答：C51的基本数据类型主要有字符型char、整型int和长整型long，又可分别分为有符号signed和无符号unsigned。MCS-51单片机是8位机，本身不支持有符号运算。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-23T13:51:14.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二次作业解答">
+<meta name="twitter:description" content="3. 在C51中为何要尽量采用无符号的字节变量或位变量？答：C51的基本数据类型主要有字符型char、整型int和长整型long，又可分别分为有符号signed和无符号unsigned。MCS-51单片机是8位机，本身不支持有符号运算。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/02zuoye/"/>
+
+
+
+
+
+  <title>第二次作业解答 | 豫工院单片机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0192a6fe47ed46ff726276682161362d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">豫工院单片机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/02zuoye/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="豫工院单片机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第二次作业解答</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T13:51:14+00:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/09/23/02zuoye/" class="leancloud_visitors" data-flag-title="第二次作业解答">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="3-在C51中为何要尽量采用无符号的字节变量或位变量？"><a href="#3-在C51中为何要尽量采用无符号的字节变量或位变量？" class="headerlink" title="3. 在C51中为何要尽量采用无符号的字节变量或位变量？"></a>3. 在C51中为何要尽量采用无符号的字节变量或位变量？</h2><p>答：C51的基本数据类型主要有字符型char、整型int和长整型long，又可分别分为有符号signed和无符号unsigned。MCS-51单片机是8位机，本身不支持有符号运算。<a id="more"></a>若变量使用有符号格式，C51编译器要进行符号位检测并需调用库函数，生成的代码比无符号长得多，占用的存储空间会变大，程序运行速度会变慢，出错的机会也会变多。MCS-51单片机主要用于实时控制，变量一般为8bit无符号格式，16bit较少，有符号和有小数点的数值计算也较少，因此，在已知变量长度和正整数的情况下，应尽量采用无符号格式：unsigned char。</p>
+<p>错误：<br>主要是没有看懂题目的侧重点，基本答成为什么尽量采用字节变量或变量，而对为什么无符号没有涉及。<br>比如：采用无符号的字节变量或位变量可提高代码效率的方法就是减小变量的长度，使用ANSI C 编程时，一般习惯于对变量使用 int 类型，而对于像 80C51 这类 8 位的单片机来说这是一种极大的浪费。80C51 单片机机器指令只支持字节和位变量，所以应该仔细考虑所声明的变量值的可能的取值范围，然后选择合适的变量类型。尽可能地选择变量类型为char、unsigned；<br>或者：在char、int、和long int三种类型的变量中char型最短，long int型最长。能使用长度短的类型变量，尽量使用段类型的变量，这样可以提高代码效率。</p>
+<h2 id="4-为了加快程序的运行速度，C51中频繁操作的量应定义在哪个存储区？"><a href="#4-为了加快程序的运行速度，C51中频繁操作的量应定义在哪个存储区？" class="headerlink" title="4. 为了加快程序的运行速度，C51中频繁操作的量应定义在哪个存储区？"></a>4. 为了加快程序的运行速度，C51中频繁操作的量应定义在哪个存储区？</h2><p>答：访问内部存储器比访问外部存储器快很多，同时，写外部存储器的寻址指令相对要复杂些，因而，为了加快程序的运行速度，C51中频繁操作的量应定义在片内RAM中，简化编程，提高存储速度，进而加快程序的运行速度。</p>
+<p>错误：<br>（1）根据前面的讨论，你在哪里讨论的？麻烦抄的时候认真一点；<br>（2）推荐读者按 data→idata→pdata→xdata 的顺序使用存储器，当然要记得在idata 空间中留出足够的堆栈空间。你自己不是读者吗? 这一句好像是题目也没有多少关系？</p>
+<h2 id="6-如何定义C51的中断函数？"><a href="#6-如何定义C51的中断函数？" class="headerlink" title="6. 如何定义C51的中断函数？"></a>6. 如何定义C51的中断函数？</h2><p>答：80C51 的中断系统十分重要，C51 编译器允许在 C 语言源程序中声明中断和编写中断服务程序，从而减轻了采用汇编程序编写中断服务程序的烦琐程度。通过使用 interrupt 关键字来实现。定义中断服务程序的一般格式如下： <br>void 函数名（）interrupt n [using m]<br>中断函数没有返回值，即使强制定义一个返回值，也不会得到一个正确的结果，因此一般将中断函数的返回类型定义为void。<br>中断函数不能进行参数传递，其无论包含任何的参数声明，都将导致编译错误，因而其不能包含形参。<br>关键字 interrupt 后面的 n 是中断号，n 的取值范围为 0～31。编译程序从 8n+3 处产生中断向量，即在程序存储器 8n+3 地址处形成一条长跳转指令，转向中断号 n 的中断服务程序。中断号对应着 IE 寄存器中的使能位，换句话说 IE 寄存器中的 0 位对应着外部中断 0，相应的外部中断 0 的中断号是 0。<br>using m 指明该中断服务程序所对应的工作寄存器组，取值范围为 0～3。指定工作寄存器组的缺点是所有被中断调用的过程都必须使用同一个寄存器组， 否则参数传递会发生错误。通常不设定 using m，除非保证中断程序中未调用其他子程序。    <br>使用 C51 编写中断服务程序，程序员无须关心 ACC、B、DPH、DPL、PSW 等寄存器的保护，C51 编译器会根据上述寄存器的使用情况在目标代码中自动增加压栈和出栈。</p>
+<p>错误：<br>（1）只答：80C51 的中断系统十分重要，C51 编译器允许在 C 语言源程序中声明中断和编写中断服务程序，从而减轻了采用汇编程序编写中断服务程序的烦琐程度。这只是回答了为何定义中断函数而不是如何定义中断函数;<br>（2） using m 写成using n，和中断号重复，不符合使用习惯；<br>（3） 没有回答m和n的取值方法；<br>（4）没有回答返回类型为什么是void，为什么没有形参，为什么m通常不设定；</p>
+<h2 id="7-写出完成下列要求的C程序。"><a href="#7-写出完成下列要求的C程序。" class="headerlink" title="7. 写出完成下列要求的C程序。"></a>7. 写出完成下列要求的C程序。</h2><p>（1）将地址为4000H的片外数据存储单元内容，送入地址为30H的片内数据存储单元中。</p>
+<pre name="code" class="C">
+void main()
+ {
+  unsigned char xdata *xdp;
+  unsigned char data *dp;
+  xdp=0x4000;
+  dp=0x30;
+  *dp=*xdp;
+ }
+</pre>
+（2）将地址为4000H的片外数据存储单元内容，送入地址为3000H的片外数据存储单元中。
+<pre name="code" class="C">
+void main()
+ {
+  unsigned char xdata *xdp1;
+  unsigned char xdata *xdp2;
+  xdp1=0x4000;
+  xdp2=0x3000;
+  *xdp2=*xdp1;
+ }
+</pre>
+（4）将片内数据存储器中的地址为30H与40H的单元内容交换。
+<pre name="code" class="C">
+void main()
+ {
+  unsigned char data *dp1,dp2;
+  unsigned char data temp;
+  dp1=0x30;
+  dp2=0x40;
+  temp=*dp1;
+  *dp1=*dp2;
+  *dp2=temp;
+ }
+</pre>
+
+<p>错误：<br>（1）没有看懂题目，直接照抄例题4.2；<br>（2）只写个别语句，没有写完整的程序；<br>（3）采用宏定义方式时没有引用库函数；</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第二次/" rel="tag"># 第二次</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/23/03zuoye/" rel="next" title="第三次作业解答">
+                <i class="fa fa-chevron-left"></i> 第三次作业解答
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/23/02dayi/" rel="prev" title="第二章答疑">
+                第二章答疑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzgyNC8xNDM1NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">单片机资料分享、课外答疑</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-在C51中为何要尽量采用无符号的字节变量或位变量？"><span class="nav-number">1.</span> <span class="nav-text">3. 在C51中为何要尽量采用无符号的字节变量或位变量？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-为了加快程序的运行速度，C51中频繁操作的量应定义在哪个存储区？"><span class="nav-number">2.</span> <span class="nav-text">4. 为了加快程序的运行速度，C51中频繁操作的量应定义在哪个存储区？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-如何定义C51的中断函数？"><span class="nav-number">3.</span> <span class="nav-text">6. 如何定义C51的中断函数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-写出完成下列要求的C程序。"><span class="nav-number">4.</span> <span class="nav-text">7. 写出完成下列要求的C程序。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zFnAomuLIwXFD6tRJInDLcpg-gzGzoHsz", "x7MOKPh7OsO3upbc70Q95FSt");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="第三次," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 什么叫中断？中断有什么特点？答：CPU暂时中止其正在执行的程序，转去执行请求中断的那个外设或事件的服务程序，等处理完毕后再返回执行原来中止的程序，叫做中断。中断的特点是随机性。">
+<meta name="keywords" content="第三次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三次作业解答">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/03zuoye/index.html">
+<meta property="og:site_name" content="豫工院单片机">
+<meta property="og:description" content="1. 什么叫中断？中断有什么特点？答：CPU暂时中止其正在执行的程序，转去执行请求中断的那个外设或事件的服务程序，等处理完毕后再返回执行原来中止的程序，叫做中断。中断的特点是随机性。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-23T13:51:14.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三次作业解答">
+<meta name="twitter:description" content="1. 什么叫中断？中断有什么特点？答：CPU暂时中止其正在执行的程序，转去执行请求中断的那个外设或事件的服务程序，等处理完毕后再返回执行原来中止的程序，叫做中断。中断的特点是随机性。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/03zuoye/"/>
+
+
+
+
+
+  <title>第三次作业解答 | 豫工院单片机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0192a6fe47ed46ff726276682161362d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">豫工院单片机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/03zuoye/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="豫工院单片机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第三次作业解答</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T13:51:14+00:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/09/23/03zuoye/" class="leancloud_visitors" data-flag-title="第三次作业解答">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-什么叫中断？中断有什么特点？"><a href="#1-什么叫中断？中断有什么特点？" class="headerlink" title="1. 什么叫中断？中断有什么特点？"></a>1. 什么叫中断？中断有什么特点？</h2><p>答：CPU暂时中止其正在执行的程序，转去执行请求中断的那个外设或事件的服务程序，等处理完毕后再返回执行原来中止的程序，叫做中断。<br>中断的特点是随机性。<br><a id="more"></a><br>错误：<br>将中断的作用和功能当做特点。</p>
+<h2 id="2-MCS-51单片机有哪几个中断源？简述各中断源的的中断请求方式、中断标志位、中断号及中断入口地址。"><a href="#2-MCS-51单片机有哪几个中断源？简述各中断源的的中断请求方式、中断标志位、中断号及中断入口地址。" class="headerlink" title="2. MCS-51单片机有哪几个中断源？简述各中断源的的中断请求方式、中断标志位、中断号及中断入口地址。"></a>2. MCS-51单片机有哪几个中断源？简述各中断源的的中断请求方式、中断标志位、中断号及中断入口地址。</h2><p>答：MCS-51单片机共有5个中断源，分别为外部中断0请求INT0、外部中断1请求INT1、定时器／计数器T0溢出中断请求TF0、定时器／计数器T1溢出中断请求TF1和串行中断请求RI或TI。<br>外部中断0的中断请求方式分为电平方式即低电平有效(IT0置0)和脉冲方式即下降沿有效(IT0置1)，中断标志位为IE0，中断号为0，入口地址为0003H；<br>外部中断1的中断请求方式分为电平方式即低电平有效(IT1置0)和脉冲方式即下降沿有效(IT1置1)，中断标志位为IE1，中断号为2，入口地址为0013H；<br>定时器T0的中断请求方式是定时/计数器的计数溢出标志TF0置1，中断标志位为TF0，中断号为1，入口地址,为000BH；<br>定时器T1的中断请求方式是定时/计数器的计数溢出标志TF1置1，中断标志位为TF1，中断号为3，入口地址,为001BH；<br>串行中断请求方式是串行中断标志位RI或TI置为1，标志位为RI和TI，中断号为4，入口地址为0023H。</p>
+<p>错误：<br>（1）没有回答请求方式；<br>（2）标志位只回答是TCON和SCON控制寄存器的第几位，而没有具体给出每一位的符号；<br>（3）没有回答各个中断源的中断号；<br>（4）注意答题技巧，不要因为第一问的答案出现下面的请求方式中而图省事不写；</p>
+<h2 id="3-MCS-51单片机外部中断有哪两种触发方式？对触发脉冲或电平有什么要求？如何选择和设定？"><a href="#3-MCS-51单片机外部中断有哪两种触发方式？对触发脉冲或电平有什么要求？如何选择和设定？" class="headerlink" title="3. MCS-51单片机外部中断有哪两种触发方式？对触发脉冲或电平有什么要求？如何选择和设定？"></a>3. MCS-51单片机外部中断有哪两种触发方式？对触发脉冲或电平有什么要求？如何选择和设定？</h2><p>答：MCS-51单片机外部中断触发方式有电平触发方式和边沿触发方式。<br>1)当IT0/IT1=0，外部中断0/1设置为电平触发方式。若 $\overline{INTO}$/$\overline{INT1}$ (P3.2/P3.3)引脚采样到低电乎，则认为有中断申请，随即使IE0/IE1标志=1。若为高电平，认为无中断申请或中断申请己撤除，随即清除IE0/IE1标志。在电平触发方式中，CPU响应中断后不能自动清除IE0/IE1标志，也不能由软件清除IE0/IE1标志，所以在中断返回前必须撤消时$\overline{INTO}$/$\overline{INT1}$  (P3.2/P3.3)引脚上的低电乎，否则将再次响应中断造成出错。<br>2)若IT0/IT1=1，外部中断1设置为边沿触发方式。若在连续两个机器周期的 $\overline{INTO}$/$\overline{INT1}$ (P3.2/P3.3)引脚上采样到先高电平后低电平，则使IE0/IE1标志=1，此标志一直保持到CPU响应中断时，才由硬件自动清除。<br>错误：答题侧重点偏差，选择设定方式时要求设定IT0/IT1，而回答其它的内容。</p>
+<p>错误：<br>（1）答题侧重点偏差，选择设定方式时要求设定IT0/IT1，而回答其它的内容。;<br>（2）注意答题技巧，不要因为第一问的答案出现下面的请求方式中而图省事不写；</p>
+<h2 id="4-MCS-51中断处理过程包括哪几个步骤-简述中断处理过程。"><a href="#4-MCS-51中断处理过程包括哪几个步骤-简述中断处理过程。" class="headerlink" title="4.MCS-51中断处理过程包括哪几个步骤?简述中断处理过程。"></a>4.MCS-51中断处理过程包括哪几个步骤?简述中断处理过程。</h2><p>答:中断处理过程可分为三个阶段，即中断响应、中断处理和中断返回。<br>中断处理(又称中断服务)程序从入口地址开始执行，直到返回指令”RETI”为止，这个过程称为中断处理。此过程一般包括两部分内容，一是保护现场，二是处理中断源的请求。因为一般主程序和中断服务程序都可能会用到累加器、PSW寄存器及其他一些寄存器。CPU在进入中断服务程序后，用到上述寄存器时就会破坏它原来存在寄存器中的内容，一旦中断返回，将会造成主程序的混乱。因而，在进入中断服务程序后，一般要先保护现场，然后再执行中断处理程序，在返回主程序以前，再恢复现场。</p>
+<p>错误：<br>无，主要记住三个阶段，其它部分大致了解即可。</p>
+<h2 id="10-在一个随机计数装置中，采用中断控制信号触发计数操作。试设计实现这一计数功能的程序。"><a href="#10-在一个随机计数装置中，采用中断控制信号触发计数操作。试设计实现这一计数功能的程序。" class="headerlink" title="10. 在一个随机计数装置中，采用中断控制信号触发计数操作。试设计实现这一计数功能的程序。"></a>10. 在一个随机计数装置中，采用中断控制信号触发计数操作。试设计实现这一计数功能的程序。</h2><pre name="code" class="C">
+#include<reg51.h>
+#include<absacc.h>
+#define uchar unsigned char
+#define uint unsigned int
+
+void main()
+{
+  INT0=1；
+  EX0=1;
+  INT1=1；
+  EX1=1;
+  EA=1;
+  while(1)；
+}
+
+void int0() interrupt 0
+ {
+    DBYTE[0x30]+=1;
+ }
+
+void int1() interrupt 2
+ {
+    DBYTE[0x30]-=1;
+ }
+</absacc.h></reg51.h></pre>
+
+<p>错误：<br>（1）没有开放外部中断1：EX1=1；<br>（2）增加不必要的选择语句，比如判读按键是否按下；<br>（3）采用宏定义方式时所引用的库函数书写错误；</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第三次/" rel="tag"># 第三次</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/23/04zuoye/" rel="next" title="第四次作业解答">
+                <i class="fa fa-chevron-left"></i> 第四次作业解答
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/23/02zuoye/" rel="prev" title="第二次作业解答">
+                第二次作业解答 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzgyNC8xNDM1NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">单片机资料分享、课外答疑</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么叫中断？中断有什么特点？"><span class="nav-number">1.</span> <span class="nav-text">1. 什么叫中断？中断有什么特点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-MCS-51单片机有哪几个中断源？简述各中断源的的中断请求方式、中断标志位、中断号及中断入口地址。"><span class="nav-number">2.</span> <span class="nav-text">2. MCS-51单片机有哪几个中断源？简述各中断源的的中断请求方式、中断标志位、中断号及中断入口地址。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-MCS-51单片机外部中断有哪两种触发方式？对触发脉冲或电平有什么要求？如何选择和设定？"><span class="nav-number">3.</span> <span class="nav-text">3. MCS-51单片机外部中断有哪两种触发方式？对触发脉冲或电平有什么要求？如何选择和设定？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-MCS-51中断处理过程包括哪几个步骤-简述中断处理过程。"><span class="nav-number">4.</span> <span class="nav-text">4.MCS-51中断处理过程包括哪几个步骤?简述中断处理过程。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-在一个随机计数装置中，采用中断控制信号触发计数操作。试设计实现这一计数功能的程序。"><span class="nav-number">5.</span> <span class="nav-text">10. 在一个随机计数装置中，采用中断控制信号触发计数操作。试设计实现这一计数功能的程序。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zFnAomuLIwXFD6tRJInDLcpg-gzGzoHsz", "x7MOKPh7OsO3upbc70Q95FSt");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

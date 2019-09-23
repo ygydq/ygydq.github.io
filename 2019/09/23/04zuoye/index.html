@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="第四次," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="3 . 简述MCS-51单片机定时器/计数器四种工作方式的特点。如何选择和设定?答: 四种工作方式的选择是通过设定工作方式寄存器TMOD 中的M1MO 两位来完成的。">
+<meta name="keywords" content="第四次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四次作业解答">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/04zuoye/index.html">
+<meta property="og:site_name" content="豫工院单片机">
+<meta property="og:description" content="3 . 简述MCS-51单片机定时器/计数器四种工作方式的特点。如何选择和设定?答: 四种工作方式的选择是通过设定工作方式寄存器TMOD 中的M1MO 两位来完成的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-23T13:51:14.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四次作业解答">
+<meta name="twitter:description" content="3 . 简述MCS-51单片机定时器/计数器四种工作方式的特点。如何选择和设定?答: 四种工作方式的选择是通过设定工作方式寄存器TMOD 中的M1MO 两位来完成的。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/04zuoye/"/>
+
+
+
+
+
+  <title>第四次作业解答 | 豫工院单片机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0192a6fe47ed46ff726276682161362d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">豫工院单片机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/04zuoye/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="豫工院单片机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第四次作业解答</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T13:51:14+00:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/09/23/04zuoye/" class="leancloud_visitors" data-flag-title="第四次作业解答">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="3-简述MCS-51单片机定时器-计数器四种工作方式的特点。如何选择和设定"><a href="#3-简述MCS-51单片机定时器-计数器四种工作方式的特点。如何选择和设定" class="headerlink" title="3 . 简述MCS-51单片机定时器/计数器四种工作方式的特点。如何选择和设定?"></a>3 . 简述MCS-51单片机定时器/计数器四种工作方式的特点。如何选择和设定?</h2><p>答: 四种工作方式的选择是通过设定工作方式寄存器TMOD 中的M1MO 两位来完成的。<br><a id="more"></a><br>1 ) 当M1M0=00时，定时/计数器工作于方式0，构成一个13 位定时/计数器。<br>2 ) 当M1M0=01时，定时/计数器工作于方式1，构成一个16 位定时/计数器。方式l 与方式0的区别在于方式0是13 位计数器。<br>3 ) 当M1M0 = 10时，定时/计数器工作于方式2，在方式2情况下，定时/计数器为8 位，能自动恢复定时/计数器初值。在方式0、方式1 时，定时/ 计数器的初值不能自动恢复， 计满后若要恢复原来的初值，须在程序中重新给TH0（TH1）、TL0（TL1）赋值，这不仅导致编程麻烦，而且影响定时时间精度。但方式2 时与方式0 、方式l 不同，方式2具有初值自动装入功能。<br>3 ) 当M 1M0= 11时，定时/计数器处于工作方式3， 但方式3仅适用于T0，T1无方式3 。方式3时，定时器T0 被分解成两个独立的8 位计数器TL0 和TH0。</p>
+<p>错误：<br>1）回答太过简单，只回答几位的定时/计数器，没有回答特点和区别；<br>2）设定方法不对，回答了GATA位等的意义，而没有突出M1M0。</p>
+<h2 id="4-定时-计数器对外部计数频率有何限制？"><a href="#4-定时-计数器对外部计数频率有何限制？" class="headerlink" title="4. 定时/计数器对外部计数频率有何限制？"></a>4. 定时/计数器对外部计数频率有何限制？</h2><p>答：当定时/计数器为计数工作方式时，计数器对来自输入引脚的外部信号计数，外部脉冲的下降沿触发计数。计数器在每个机器周期的S5P2器件采样引脚输入电平，若一个机器周期采样值1，下一个机器周期的采样值为0，则计数值加1。新的计数值是检测到输入引脚电平发生1到0的负跳变沿后，于下一个机器周期的S3P1期间装入计数器中的，所以检测一个由1至0的跳变需要两个机器周期，故外部脉冲的最高计数频率为振荡频率的1/24。</p>
+<p>错误：<br>1）重点是外部脉冲的最高计数频率为振荡频率的1/24；<br>2）对于单振荡周期的单片机不是本课的讨论范围，不要给自己增加负担。</p>
+<h2 id="5-定时-计数器初始化包括哪些步骤"><a href="#5-定时-计数器初始化包括哪些步骤" class="headerlink" title="5 . 定时/计数器初始化包括哪些步骤?"></a>5 . 定时/计数器初始化包括哪些步骤?</h2><p>答: 初始化步骤如下:<br>1）根据设计要求先给工作方式寄存器TMOD送一个方式控制字，以设定定时/计数器相应的工作方式；<br>2）根据实际需要给定时/计数器选送定时器初值或计数器初值，以确定需要定时的时间和需要计数的初值；<br>3）根据需要给中断允许寄存器IE选送中断控制字，并给中断优先级寄存器IP 选送中断优先级字，以开放相应中断并设定中断优先级；<br>4）给控制寄存器TCON送命令字，以便启动或禁止定时器/计数器的运行。</p>
+<p>错误：<br>1）未写步骤三；<br>2）抄袭，还抄袭一个错误的答案;<br>3）步骤1，初始化，什么意思，不懂？</p>
+<h2 id="6-已知单片机时钟频率fosc-12MHz，当要求定时时间为2ms或5ms，-定时器分别工作在方式0、方式1和方式2时，定时器计数初值各是多少"><a href="#6-已知单片机时钟频率fosc-12MHz，当要求定时时间为2ms或5ms，-定时器分别工作在方式0、方式1和方式2时，定时器计数初值各是多少" class="headerlink" title="6. 已知单片机时钟频率fosc=12MHz，当要求定时时间为2ms或5ms， 定时器分别工作在方式0、方式1和方式2时，定时器计数初值各是多少?"></a>6. 已知单片机时钟频率fosc=12MHz，当要求定时时间为2ms或5ms， 定时器分别工作在方式0、方式1和方式2时，定时器计数初值各是多少?</h2><p>解: 因为单片机时钟频率fosc = 1 2MHz，所以机器周期Tcy=12/fosc=1us，根据初值公式<br>Count=2<sup>n</sup>-Td/Tcy<br>得<br>1） Td=2ms=2000us 时：<br>方式0时 Count=2<sup>13</sup>-2000us/1us=8192-2000=6192<br>TH0/ TH1=6192/32=193=C1H   TL0/ TL1=6192%32=16=10H<br>方式1时 Count=2<sup>16</sup> -2000us/1us=65536-2000=63536<br>TH0/ TH1=63536/256=248=F8H   TL0/ TL1=63536%256=48=30H<br>方式2时，单次溢出最长只能延时256us，因此可设定每次溢出延时200us，累计10次溢出即可得2ms，因此初值可设置为：<br>Count =2<sup>8</sup>-200us/1us=256-200=56=38H，TH0/ TH1=38H， TL0/ TL1=38H<br>2） Td=5ms=5000us时：<br>方式0时Count=2<sup>13</sup>-5000us/1us=8192-5000=3192<br>TH0/ TH1=3192/32=99=63H   TL0/ TL1=3192%32=24=18H<br>方式1时Count=2<sup>16</sup> -5000us/1us=65536-5000=60536<br>TH0/ TH1=60536/256=236=ECHH   TL0/ TL1=60536%256=120=78H<br>方式2时，单次溢出最长只能延时256us ，因此可设定每次溢出延时200 us，累计25次溢出即可得5ms， 因此初值可设置为<br>Count =2<sup>8</sup>-200us/1us=256-200=56=38H，TH0/ TH1=38H， TL0/ TL1=38H</p>
+<p>错误：<br>1）未计算出最终结果：TH0/ TH1、TL0/ TL1；<br>2）抄袭，连错误一起抄过来，比如-2000/256，初值什么时间会出现负值；<br>3）抄袭严重；</p>
+<h2 id="7-己知MCS-51单片机的fosc-6MHz，请利用中断技术和T0，从Pl-0端输出高电平宽度为50us、低电平宽度为200us的矩形波。"><a href="#7-己知MCS-51单片机的fosc-6MHz，请利用中断技术和T0，从Pl-0端输出高电平宽度为50us、低电平宽度为200us的矩形波。" class="headerlink" title="7. 己知MCS-51单片机的fosc =6MHz，请利用中断技术和T0，从Pl.0端输出高电平宽度为50us、低电平宽度为200us的矩形波。"></a>7. 己知MCS-51单片机的fosc =6MHz，请利用中断技术和T0，从Pl.0端输出高电平宽度为50us、低电平宽度为200us的矩形波。</h2><p>解: 设定时长度为Td=50us，高电平延时l个Td ，低电平延时4个Td，延时时间较短，可采用方式2，则初值计算为<br>Count =2<sup>8</sup>-50us/2us=256-25=231=E7H<br>T0工作于方式2，有GATA=0，C/T=0， M1=1，M0=0；<br>Tl未使用，因此TMOD =02H</p>
+<pre name="code" class="C">
+#include<reg51.h>
+sbit P1_0=P1^0;
+unsigned char Td1=1;
+unsigned char Td4=4;
+
+void main ()
+ {
+  TMOD=0x02;
+  TL0=0xe7;
+  TH0=0xe7;
+  ET0=l;
+  EA=l;
+  TR0=l :
+  P1_0=l :
+  while(1);
+ }
+void int0 () interrupt 1
+ {
+  Td1--;
+  Td4--;
+  if (Td1==0)
+   {
+    P1_0=0;
+    Td4=4;
+   }
+  if (Td4==0)
+   {
+    P1_0=1;
+    Td1=1;
+   }
+ }
+</reg51.h></pre>
+错误：
+1）抄袭，而且抄错，比如特殊功能寄存名写错；
+2）变量使用前未定义；
+
+## 11. 设计一个8 灯闪烁的控制电路，系统晶振为12MHz，编程实现8灯轮流闪烁，每盏灯点亮时间为2s。
+解：采用定时计数器T0工作于方式l,TMOD=0x0l:
+初值计算:
+周期为4s，则延时时间长度需2s
+因为工作在方式1下，且机器周期为l us，最长延时时间长度为65536us，即65. 536ms
+因此我们可以让定时计数器每次延时50ms，并且让其溢出40次，则延时时间长度
+Td=50ms*40=2000ms=2s
+因此初值为Count=65536-50000us/ 1us =15536
+TH0=15536/256=60=3CH    TL0=15536%256=176=b0H
+
+<pre name="code" class="C">
+#include <reg51. h="">
+#include <intrins.h>
+unsigned char i =40, j=0;
+void main()
+  {
+    TMOD=0x01:
+    TH0=0x3c:
+    TL0=0xb0;
+    ET0=1;
+    EA=1 :
+    TR0=1:
+    while(1) ;
+  }
+
+void timer0() interrupt 1
+ {
+  TH0=0x3c:
+  TL0=0xb0;
+  i-- ;
+  if (i==0)
+   {
+    i=40:
+    P1=_crol_ (0x0l, j)
+    j ++;
+    if (j==8) j=0;
+  }
+ }
+</intrins.h></reg51.></pre>
+
+<p>错误：<br>1）初值计算错误；<br>2）抄袭，而且抄错，比如特殊功能寄存名写错；</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第四次/" rel="tag"># 第四次</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/23/03zuoye/" rel="prev" title="第三次作业解答">
+                第三次作业解答 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzgyNC8xNDM1NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">单片机资料分享、课外答疑</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-简述MCS-51单片机定时器-计数器四种工作方式的特点。如何选择和设定"><span class="nav-number">1.</span> <span class="nav-text">3 . 简述MCS-51单片机定时器/计数器四种工作方式的特点。如何选择和设定?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-定时-计数器对外部计数频率有何限制？"><span class="nav-number">2.</span> <span class="nav-text">4. 定时/计数器对外部计数频率有何限制？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-定时-计数器初始化包括哪些步骤"><span class="nav-number">3.</span> <span class="nav-text">5 . 定时/计数器初始化包括哪些步骤?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-已知单片机时钟频率fosc-12MHz，当要求定时时间为2ms或5ms，-定时器分别工作在方式0、方式1和方式2时，定时器计数初值各是多少"><span class="nav-number">4.</span> <span class="nav-text">6. 已知单片机时钟频率fosc=12MHz，当要求定时时间为2ms或5ms， 定时器分别工作在方式0、方式1和方式2时，定时器计数初值各是多少?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-己知MCS-51单片机的fosc-6MHz，请利用中断技术和T0，从Pl-0端输出高电平宽度为50us、低电平宽度为200us的矩形波。"><span class="nav-number">5.</span> <span class="nav-text">7. 己知MCS-51单片机的fosc =6MHz，请利用中断技术和T0，从Pl.0端输出高电平宽度为50us、低电平宽度为200us的矩形波。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zFnAomuLIwXFD6tRJInDLcpg-gzGzoHsz", "x7MOKPh7OsO3upbc70Q95FSt");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
